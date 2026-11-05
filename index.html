@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bright Smile Dental Clinic | AI Receptionist</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <a href="#" class="brand">
+      <div class="brand-icon">✦</div>
+      <div>
+        <strong>Bright Smile Dental</strong>
+        <small>DENTAL CLINIC · PESHAWAR</small>
+      </div>
+    </a>
+    <div class="status">
+      <span class="status-dot"></span>
+      Receptionist Available
+    </div>
+  </header>
+
+  <main class="page">
+
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">YOUR SMILE, OUR PRIORITY</span>
+        <h1>Better care.<br>Brighter <span>smiles.</span></h1>
+        <p>
+          Welcome to Bright Smile Dental Clinic. Chat with our AI
+          receptionist to learn about our services, ask questions,
+          or book your next appointment.
+        </p>
+        <div class="hero-details">
+          <span>✦ Friendly dental care</span>
+          <span>✦ Easy online booking</span>
+        </div>
+      </div>
+
+      <div class="chat-card">
+        <div class="chat-header">
+          <div class="assistant-avatar">✦</div>
+          <div class="assistant-info">
+            <strong>Bright Smile Assistant</strong>
+            <small><span class="status-dot"></span> Online · Ready to help</small>
+          </div>
+          <span class="ai-label">AI ASSISTANT</span>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+          <div class="message bot-message">
+            <div class="message-avatar">✦</div>
+            <div class="bubble">
+              Hello! Welcome to Bright Smile Dental Clinic. How can I help you today?
+            </div>
+          </div>
+        </div>
+
+        <div class="typing-indicator" id="typingIndicator" hidden>
+          <span></span><span></span><span></span>
+          Assistant is typing...
+        </div>
+
+        <div class="quick-questions">
+          <button class="quick-question" type="button">What are your hours?</button>
+          <button class="quick-question" type="button">What services do you offer?</button>
+          <button class="quick-question" type="button">Where are you located?</button>
+        </div>
+
+        <form id="chatForm">
+          <div class="chat-input-area">
+            <input
+              type="text"
+              id="chatInput"
+              placeholder="Ask me anything..."
+              autocomplete="off"
+              required
+            >
+            <button class="voice-button" id="voiceButton" type="button" title="Voice input">🎙</button>
+            <button class="send-button" id="sendButton" type="submit">➤</button>
+          </div>
+        </form>
+
+        <div class="chat-footer">
+          <span>AI-powered clinic assistance</span>
+          <span id="chatStatus">Typically replies instantly</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="booking-section" id="booking">
+      <div class="section-heading">
+        <span class="eyebrow">ONLINE APPOINTMENTS</span>
+        <h2>Book an Appointment</h2>
+        <p>Choose a date and see the available appointment times.</p>
+      </div>
+
+      <div class="booking-card">
+        <form id="bookingForm">
+
+          <div class="booking-fields">
+            <div class="form-group">
+              <label for="customerName">Full Name *</label>
+              <input
+                type="text"
+                id="customerName"
+                name="customer_name"
+                placeholder="Enter your full name"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="customerPhone">Phone Number *</label>
+              <input
+                type="tel"
+                id="customerPhone"
+                name="phone"
+                placeholder="Enter your phone number"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="customerEmail">Email Address (Optional)</label>
+              <input
+                type="email"
+                id="customerEmail"
+                name="email"
+                placeholder="Enter your email"
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="service">Dental Service *</label>
+              <select id="service" name="service" required>
+                <option value="">Select a service</option>
+                <option>General checkup</option>
+                <option>Teeth cleaning</option>
+                <option>Fillings</option>
+                <option>Braces consultation</option>
+                <option>Tooth extraction</option>
+              </select>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="appointmentDate">Choose Appointment Date *</label>
+              <input
+                type="date"
+                id="appointmentDate"
+                name="date"
+                required
+              >
+              <small>Monday to Saturday · 9:00 AM to 6:00 PM</small>
+            </div>
+          </div>
+
+          <div class="form-group slots-group">
+            <label>Available Appointment Times *</label>
+            <p class="slot-instruction" id="slotMessage">
+              Select a date to view available times.
+            </p>
+            <div class="time-slots" id="timeSlots"></div>
+            <input type="hidden" id="selectedSlot" name="slot_start" required>
+          </div>
+
+          <button class="booking-button" id="bookingButton" type="submit" disabled>
+            Confirm Appointment
+          </button>
+
+          <div class="booking-result" id="bookingResult" role="status" aria-live="polite"></div>
+
+        </form>
+      </div>
+    </section>
+
+        <section class="cancellation-section" id="cancel-appointment">
+      <div class="section-heading">
+        <span class="eyebrow">NEED TO CHANGE YOUR PLANS?</span>
+        <h2>Cancel an Appointment</h2>
+        <p>Enter the phone number and appointment details used when booking.</p>
+      </div>
+
+      <div class="cancellation-card">
+        <form id="cancellationForm">
+
+          <div class="form-group">
+            <label for="cancelPhone">Phone Number *</label>
+            <input
+              type="tel"
+              id="cancelPhone"
+              name="phone"
+              placeholder="Enter your booking phone number"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="cancelDate">Appointment Date *</label>
+            <input
+              type="date"
+              id="cancelDate"
+              name="date"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="cancelTime">Appointment Time *</label>
+            <input
+              type="time"
+              id="cancelTime"
+              name="time"
+              required
+            >
+          </div>
+
+          <button class="booking-button" id="cancellationButton" type="submit">
+            Cancel Appointment
+          </button>
+
+          <div
+            class="booking-result"
+            id="cancellationResult"
+            role="status"
+            aria-live="polite"
+          ></div>
+
+        </form>
+      </div>
+    </section>
+
+
+    <section class="info-section">
+      <div class="section-heading">
+        <span class="eyebrow">GET TO KNOW US</span>
+        <h2>We're Here for Your Smile</h2>
+        <p>Everything you need to know before visiting us.</p>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-icon">◷</div>
+          <h3>Opening Hours</h3>
+          <strong>9:00 AM – 6:00 PM</strong>
+          <p>Monday to Saturday</p>
+          <small>Closed on Sundays</small>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">✦</div>
+          <h3>Our Services</h3>
+          <ul>
+            <li>General checkups</li>
+            <li>Teeth cleaning</li>
+            <li>Fillings</li>
+            <li>Braces consultations</li>
+            <li>Tooth extraction</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">⌖</div>
+          <h3>Visit Our Clinic</h3>
+          <p>Bright Smile Dental Clinic</p>
+          <strong>Peshawar, Pakistan</strong>
+          <small>Contact our receptionist for directions.</small>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <strong>Bright Smile Dental Clinic</strong>
+      <p>Quality dental care with a smarter way to connect.</p>
+      <small>© 2026 Bright Smile Dental Clinic. All rights reserved.</small>
+    </footer>
+
+  </main>
+
+</body>
+</html>
