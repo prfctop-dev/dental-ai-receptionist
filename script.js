@@ -1,7 +1,7 @@
 
-const N8N_CHAT_URL = "https://n8n-production-b6af.up.railway.app/webhook/dental-chat";
-const N8N_AVAILABILITY_URL = "https://n8n-production-b6af.up.railway.app/webhook/dental-available-slots";
-const N8N_BOOKING_URL = "https://n8n-production-b6af.up.railway.app/webhook/dental-book-appointment";
+const N8N_CHAT_URL = "https://main-production-14ac.up.railway.app/webhook/dental-chat";
+const N8N_AVAILABILITY_URL = "https://main-production-14ac.up.railway.app/webhook/dental-available-slots";
+const N8N_BOOKING_URL = "https://main-production-14ac.up.railway.app/webhook/dental-book-appointment";
 
 // CHAT ELEMENTS
 const chatForm = document.getElementById("chatForm");
