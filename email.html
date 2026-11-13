@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Your Email | Bright Smile Dental Clinic</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: #0b1725;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 430px;
+            padding: 32px;
+            border: 1px solid #263d50;
+            border-radius: 16px;
+            background: #132638;
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 25px;
+        }
+
+        p {
+            color: #b8c9d5;
+            line-height: 1.6;
+        }
+
+        label {
+            display: block;
+            margin: 24px 0 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #496174;
+            border-radius: 8px;
+            background: #0b1725;
+            color: white;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 18px;
+            padding: 14px;
+            border: 0;
+            border-radius: 8px;
+            background: #14b8a6;
+            color: #062b2a;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #message {
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h1>Confirm Your Email</h1>
+
+        <p>
+            Please enter your email address so Bright Smile Dental Clinic
+            can send your appointment confirmation.
+        </p>
+
+        <form id="emailForm">
+            <label for="email">Email Address</label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required
+            >
+
+            <button type="submit">Submit Email</button>
+        </form>
+
+        <p id="message" role="status"></p>
+    </main>
+
+    
+
+<script>
+const EMAIL_WEBHOOK_URL = "https://main-production-14ac.up.railway.app/webhook/dental-email-capture";
+
+const params = new URLSearchParams(window.location.search);
+const captureToken = params.get("token");
+
+const form = document.getElementById("emailForm");
+const message = document.getElementById("message");
+
+if (!captureToken) {
+    form.querySelector("button").disabled = true;
+    message.textContent = "Invalid or missing booking link. Please request a new link.";
+}
+
+form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    if (!captureToken) return;
+
+    const email = document.getElementById("email").value.trim();
+    const button = form.querySelector("button");
+
+    button.disabled = true;
+    button.textContent = "Submitting...";
+    message.textContent = "";
+
+    try {
+        const response = await fetch(EMAIL_WEBHOOK_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: email,
+                capture_token: captureToken
+            })
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+            throw new Error(result.message || "Could not submit email.");
+        }
+
+        message.textContent = "Email confirmed successfully!";
+        form.reset();
+
+    } catch (error) {
+        message.textContent = error.message || "Submission failed. Please try again.";
+        console.error(error);
+    } finally {
+        button.disabled = false;
+        button.textContent = "Submit Email";
+    }
+});
+</script>
+
+
+
+</body>
+</html>
