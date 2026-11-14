@@ -535,7 +535,7 @@ if (cancellationForm) {
       ).toISOString();
 
       const response = await fetch(
-        "https://n8n-production-b6af.up.railway.app/webhook/dental-cancel-appointment",
+        "https://main-production-14ac.up.railway.app/webhook/dental-cancel-appointment",
         {
           method: "POST",
           headers: {
