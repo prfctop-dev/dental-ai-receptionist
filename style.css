@@ -725,57 +725,102 @@ footer p, footer small {
    APPOINTMENT CANCELLATION SECTION
 ====================================== */
 
+
 .cancellation-section {
-  padding: 70px 20px;
-  background: #f8fafc;
+  padding: 90px 20px;
+  background: var(--background);
 }
 
 .cancellation-card {
   max-width: 550px;
-  margin: 30px auto 0;
-  padding: 30px;
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  margin: 32px auto 0;
+  padding: 34px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
 }
 
 .cancellation-card .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .cancellation-card label {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 9px;
+  color: #e5edf4;
+  font-size: 12px;
   font-weight: 600;
 }
 
 .cancellation-card input {
   width: 100%;
-  padding: 13px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 15px;
-  box-sizing: border-box;
+  padding: 14px;
+  background: #0c1a29;
+  color: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font: inherit;
+  font-size: 12px;
+  outline: none;
+  color-scheme: dark;
+  transition: border-color 0.2s;
+}
+
+.cancellation-card input::placeholder {
+  color: #7890a5;
 }
 
 .cancellation-card input:focus {
-  outline: none;
-  border-color: #2563eb;
+  border-color: var(--accent);
 }
 
 .cancellation-card .booking-button {
   width: 100%;
   margin-top: 10px;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #09221f;
+  font-size: 13px;
+  font-weight: 800;
   cursor: pointer;
+  transition: 0.2s;
+}
+
+.cancellation-card .booking-button:hover:not(:disabled) {
+  background: #76e6d4;
+  transform: translateY(-1px);
 }
 
 .cancellation-card .booking-button:disabled {
-  opacity: 0.6;
+  opacity: 0.45;
   cursor: not-allowed;
 }
 
 #cancellationResult {
   margin-top: 18px;
   text-align: center;
+  font-size: 12px;
   font-weight: 600;
+  line-height: 1.7;
+}
+
+#cancellationResult.success {
+  color: var(--accent);
+}
+
+#cancellationResult.error {
+  color: #ff929d;
+}
+
+@media (max-width: 600px) {
+  .cancellation-section {
+    padding: 65px 16px;
+  }
+
+  .cancellation-card {
+    padding: 23px 18px;
+  }
 }
